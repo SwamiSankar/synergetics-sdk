@@ -49,4 +49,6 @@ yarn test:visual
 
 For details see README for specific library.
 
+Hello World!
+
 Then you can open a new pull request: https://github.com/synergetics/embed/pulls
