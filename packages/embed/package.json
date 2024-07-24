@@ -2,7 +2,7 @@
   "name": "@synergetics/embed",
   "version": "5.0.0",
   "main": "./build/index.js",
-  "types": "./types/index.d.ts",
+  "types": ".types/index.d.ts",
   "author": "synergetics",
   "license": "MIT",
   "homepage": "https://github.com/synergetics/embed/blob/main/packages/embed#readme",
@@ -73,5 +73,8 @@
         "types/not-supported-ts-version.d.ts"
       ]
     }
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
   }
 }

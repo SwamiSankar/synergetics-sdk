@@ -3,10 +3,9 @@ import { DEFAULT_DOMAIN } from '../constants'
 
 import { removeUndefinedKeys } from './remove-undefined-keys'
 import { isDefined } from './is-defined'
-import { getTransitiveSearchParams } from './get-transitive-search-params'
 import { getHubspotHiddenFields } from './hubspot'
 
-const getDefaultUrlOptions = (): UrlOptions => ({
+const getDefaultUrlOptions = (): any => ({
   source: window?.location?.hostname.replace(/^www\./, ''),
   medium: 'embed-sdk',
   mediumVersion: 'next',
@@ -20,17 +19,8 @@ const addDefaultUrlOptions = (options: UrlOptions): UrlOptions => {
   return { ...getDefaultUrlOptions(), ...removeUndefinedKeys(options) }
 }
 
-const typesToEmbed: Record<EmbedType, string> = {
-  widget: 'embed-widget', // TODO: when widget is full page use 'embed-fullpage'
-  popup: 'popup-blank',
-  slider: 'popup-drawer',
-  popover: 'popup-popover',
-  'side-tab': 'popup-side-panel',
-}
 
 const mapOptionsToQueryParams = (
-  type: EmbedType,
-  embedId: string,
   options: UrlOptions & SizeableOptions & ActionableOptions
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Record<string, any> => {
@@ -106,8 +96,8 @@ const buildHashParams = (url: URL, options: BaseOptions & UrlOptions): string =>
 }
 
 export const buildIframeSrc = (params: BuildIframeSrcOptions): string => {
-  const { domain, formId, type, embedId, options } = params
-  const queryParams = mapOptionsToQueryParams(type, embedId, addDefaultUrlOptions(options))
+  const { domain, formId,options } = params
+  const queryParams = mapOptionsToQueryParams(addDefaultUrlOptions(options))
 
   const url = getBaseUrl(formId, domain)
 

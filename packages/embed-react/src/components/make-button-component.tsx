@@ -18,6 +18,12 @@ type ButtonComponentBaseProps = {
   id: string
   as?: keyof ReactHTML
   buttonProps?: ButtonProps & AriaAttributes
+  wid?:string
+  token?: string
+  avatarAssetId?: string
+  chatOnly?: boolean
+  modelOnly?: boolean
+  chatPosition?: 'left' | 'right' | 'top' | 'bottom'
   style?: CSSProperties
   className?: string
   children?: ReactNode
@@ -26,18 +32,18 @@ type ButtonComponentBaseProps = {
 
 export type ButtonComponentProps<T> = T & ButtonComponentBaseProps
 
-type CreateFnProps<T> = Omit<ButtonComponentProps<T>, keyof ButtonComponentBaseProps> & {
-  wid?: string
-  token?: string
-  avatarAssetId?: string
-  chatOnly?: boolean
-  modelOnly?: boolean
-  chatPosition?: 'left' | 'right' | 'top' | 'bottom'
-}
+// type CreateFnProps<T> = Omit<ButtonComponentProps<T>, keyof ButtonComponentBaseProps> & {
+//   wid?: string
+//   token?: string
+//   avatarAssetId?: string
+//   chatOnly?: boolean
+//   modelOnly?: boolean
+//   chatPosition?: 'left' | 'right' | 'top' | 'bottom'
+// }
 
-type CreateFn<T> = (id: string, props: CreateFnProps<T>) => GenericEmbed
+type CreateFn = (id: string, props: any) => GenericEmbed
 
-function makeButtonComponent<T>(createFn: CreateFn<T>, cssFilename: string) {
+function makeButtonComponent<T>(createFn: CreateFn, cssFilename: string) {
   return ({
     id,
     children,

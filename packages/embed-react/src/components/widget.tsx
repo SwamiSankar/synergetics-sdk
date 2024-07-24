@@ -15,8 +15,8 @@ export type WidgetProps = Omit<WidgetOptions, 'container'> & {
   chatPosition?: 'left' | 'right' | 'top' | 'bottom'
 }
 
-export const Widget = ({ id, style = {}, className = '', ...props }: WidgetProps) => {
-  const container = useRef<HTMLDivElement>(null)
+export const Widget = ({ id, style = {}, className = '',props}: WidgetProps) => {
+  const container = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (container.current) {
@@ -34,6 +34,9 @@ export const Widget = ({ id, style = {}, className = '', ...props }: WidgetProps
       return () => {
         ref.unmount()
       }
+    }
+    else{
+      console.log("No Error");
     }
   }, [id, props])
 

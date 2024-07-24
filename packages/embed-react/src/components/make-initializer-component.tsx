@@ -7,12 +7,7 @@ import { InlineStyle } from './inline-style'
 type InitializerComponentBaseProps = {
   id: string
   embedRef?: MutableRefObject<GenericEmbed | undefined>
-}
-
-export type InitializerComponentProps<T> = T & InitializerComponentBaseProps
-
-type CreateFnProps<T> = Omit<InitializerComponentProps<T>, keyof InitializerComponentBaseProps> & {
-  wid?: string
+  wid?:string
   token?: string
   avatarAssetId?: string
   chatOnly?: boolean
@@ -20,9 +15,20 @@ type CreateFnProps<T> = Omit<InitializerComponentProps<T>, keyof InitializerComp
   chatPosition?: 'left' | 'right' | 'top' | 'bottom'
 }
 
-type CreateFn<T> = (id: string, props: CreateFnProps<T>) => GenericEmbed
+export type InitializerComponentProps<T> = T & InitializerComponentBaseProps
 
-function makeInitializerComponent<T>(createFn: CreateFn<T>, cssFilename: string) {
+// type CreateFnProps<T> = Omit<InitializerComponentProps<T>, keyof InitializerComponentBaseProps> & {
+//   wid?: string
+//   token?: string
+//   avatarAssetId?: string
+//   chatOnly?: boolean
+//   modelOnly?: boolean
+//   chatPosition?: 'left' | 'right' | 'top' | 'bottom'
+// }
+
+type CreateFn = (id: string, props: any) => GenericEmbed
+
+function makeInitializerComponent<T>(createFn: CreateFn, cssFilename: string) {
   return ({ id, embedRef, ...props }: InitializerComponentProps<T>) => {
     const internalRef = useRef(genericEmbed)
     const ref = embedRef || internalRef
